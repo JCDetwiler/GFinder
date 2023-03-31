@@ -7,7 +7,6 @@
 #include "global_variable.h"
 
 #define NOMINMAX
-#include <windows.h>
 
 #ifdef max
 #undef max
@@ -58,7 +57,7 @@ inline set<long long> parse_edge_type_string(string & edge_types) {
 	vector<string> v;
 	split(edge_types, v, ',');
 	set<long long> edge_type;
-	for (int i = 0; i < v.size(); i++) {
+	for (long unsigned int i = 0; i < v.size(); i++) {
 		edge_type.insert(atoll(v[i].c_str()));
 	}
 	return edge_type;

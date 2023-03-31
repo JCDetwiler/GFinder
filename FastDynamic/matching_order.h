@@ -5,6 +5,7 @@
 
 #include "global_variable.h"
 #include <algorithm>
+#include <cfloat>
 
 #define MAX_NTE_QUERY 2000
 
@@ -48,10 +49,8 @@ inline void assignMatchOrderUnit(MatchOrderUnit & unit, long long node, long lon
 inline void addIntoMatchOrderSequenceForWholeGraph(long long node_id, char isRoot, long long * g_query_node_id_to_matching_order_num) {
 
 	if (node_id == 225) {
-		int a = 0;
 	}
 	if (node_id == 221) {
-		int a = 0;
 	}
 
 	// g_matching_sequence_index_of_core is 0 when first enter
@@ -144,7 +143,6 @@ inline void calculate_path_cost_in_core_by_core_query_tree(long long & root, lon
 			}
 		}
 	}
-	int a = 0;
 }
 
 inline void deal_with_first_path(long long & first_path_leaf, long long & first_leaf_index) {
@@ -210,7 +208,7 @@ inline void generateMatchingOrderByDynamic() {
 	temp_array_query_index = 0;
 	long long root = g_root_node_id_of_query;
 
-	long long first_path_leaf; // the leaf node of the first path
+	long long first_path_leaf = 0; // the leaf node of the first path
 
 							   //include the root node first => this always has nothing to do with the matching option
 	addIntoMatchOrderSequenceForWholeGraph(root, 1, g_query_node_id_to_matching_order_num); // need to change this function if used for bcc-ordered matching
@@ -218,7 +216,7 @@ inline void generateMatchingOrderByDynamic() {
 	sum_nontree_edge_of_every_node[root] = 0; // must initialize this
 
 
-	long long first_leaf_index;
+	long long first_leaf_index = 0;
 
 	calculate_path_cost_in_core_by_core_query_tree(root, first_path_leaf, first_leaf_index);
 
@@ -235,7 +233,7 @@ inline void generateMatchingOrderByDynamic() {
 
 	// bottom-up for each remaining path and record each leaf path's connection node
 	{
-		long long min_leaf_index;
+		long long min_leaf_index = 0;
 		// I add
 		double min_ranking = DBL_MAX;
 
@@ -313,7 +311,7 @@ inline void generateMatchingOrderByDynamic() {
 
 	{//now we start to select the rest of the paths
 
-		long long min_leaf_index;
+		long long min_leaf_index = 0;
 
 		while (g_leaf_nodes_index != 0) {
 
@@ -455,8 +453,6 @@ inline void calculateLayerCostInCoreByCoreQueryTree(long long & root, long long 
 			}
 		}
 	}
-	int a = 0;
-
 }
 
 
@@ -484,8 +480,8 @@ inline void matchingOrderLayer() {
 
 	calculateLayerCostInCoreByCoreQueryTree(root, first_path_leaf, first_leaf_index);
 
-	long long leaf_num = g_leaf_nodes_index;
-	long long layer_size = g_level_size - 2;
+	//long long leaf_num = g_leaf_nodes_index;
+	// long long layer_size = g_level_size - 2;
 
 	deal_with_first_path(first_path_leaf, first_leaf_index);
 
@@ -493,13 +489,10 @@ inline void matchingOrderLayer() {
 
 	for (int i = 2; i < g_level_size; i++) {
 		sort(g_level[i].begin(), g_level[i].end(), sort_by_path_sum);
-		for (int j = 0; j < g_level[i].size(); j++) {
+		for (unsigned long int j = 0; j < g_level[i].size(); j++) {
 			addIntoMatchOrderSequenceForWholeGraph(g_level[i][j], 0, g_query_node_id_to_matching_order_num);
 		}
 	}
-
-	int a = 0;
-
 
 }
 
@@ -714,26 +707,26 @@ inline void test1() {
 
 	long long LEVEL[MAX_QUERY_NODE];
 	for (int i = 1; i <= g_level_size; i++) {
-		for (int j = 0; j < g_level[i].size(); j++) {
+		for (unsigned long int j = 0; j < g_level[i].size(); j++) {
 			LEVEL[g_level[i][j]] = i;
 		}
 	}
 
 	int LL = 20;
-	for (int i = 1; i < temp_vector.size(); i++) {
+	for (unsigned long int i = 1; i < temp_vector.size(); i++) {
 		long long cId = temp_vector[i];
 		if (LEVEL[cId] >= 3) {
 			LL--;
 		}
 		if (LL <= 1) {
 			addIntoMatchOrderSequenceForWholeGraph(cId, 0, g_query_node_id_to_matching_order_num);
-			for (int j = i + 1; j < temp_vector.size(); j++) {
+			for (unsigned long int j = i + 1; j < temp_vector.size(); j++) {
 				long long CCId = temp_vector[j];
 				if (LEVEL[CCId] < 3) {
 					addIntoMatchOrderSequenceForWholeGraph(CCId, 0, g_query_node_id_to_matching_order_num);
 				}
 			}
-			for (int j = i + 1; j < temp_vector.size(); j++) {
+			for (unsigned long int j = i + 1; j < temp_vector.size(); j++) {
 				long long CCId = temp_vector[j];
 				if (LEVEL[CCId] >= 3) {
 					addIntoMatchOrderSequenceForWholeGraph(CCId, 0, g_query_node_id_to_matching_order_num);
@@ -745,12 +738,9 @@ inline void test1() {
 		}
 		else {
 			addIntoMatchOrderSequenceForWholeGraph(cId, 0, g_query_node_id_to_matching_order_num);
-		
+
 		}
 	}
-
-	int a = 0;
-
 }
 
 

@@ -3,20 +3,21 @@
 #ifndef FAST_DYNAMIC_DATA_STRUCTURE_H_
 #define FAST_DYNAMIC_DATA_STRUCTURE_H_
 
-#include <iostream> 
+#include <iostream>
 #include <vector>
 #include <cstdlib>
 #include <set>
 #include <unordered_map>
 
 #include <limits>
+#include <cstring>
 #include <algorithm>
 
 using namespace std;
 
 #define HT_LENGTH 1000
 
-struct CPIPath 
+struct CPIPath
 {
 	long long parent_id;
 	int size;
@@ -99,7 +100,7 @@ struct CPINode
 	long * path; // record the path number of each candidate
 	int size; // the size of candidate; Notice the size of path is equal to the size of candidate
 	int * candidates; // candidate set, the value is nodeID
-	//CPIPath ** index_N_up_u = NULL; // 
+	//CPIPath ** index_N_up_u = NULL; //
 	CPICell ** index_N_up_u = NULL;
 	long long * size_of_index = NULL; // size of index_N_up_u
 	int parent_cand_size;
@@ -155,7 +156,7 @@ struct CPINodeSize {
 	long long level;
 
 	bool operator <(CPINodeSize right) const {
-		
+
 		double a = 0.1;
 		double b = 1;
 		double c = 1;
@@ -184,9 +185,9 @@ struct CPINodeSize {
 		double y = degree - right.degree;
 		double z = pre_visited_num - right.pre_visited_num;
 
-		
+
 		double res = a * x + b * y + c * z;
-		
+
 		return res > 0;
 
 	}
@@ -202,8 +203,8 @@ struct CPINodeSize2 {
 
 	bool operator <(CPINodeSize2 a) const {
 
-		long long degree_v = degree + pre_visited_num * 30;
-		long long degree_v_a = a.degree + a.pre_visited_num * 30;
+		// long long degree_v = degree + pre_visited_num * 30;
+		// long long degree_v_a = a.degree + a.pre_visited_num * 30;
 
 		//if (abs(size - a.size) < 200) {
 		//	return degree_v < degree_v_a;
@@ -293,7 +294,7 @@ public:
 	HashTable() {
 		this->length = HT_LENGTH;
 		this->array = new Element *[HT_LENGTH];
-		memset(array, NULL, sizeof(void *) * HT_LENGTH);
+		memset(array, '\0', sizeof(void *) * HT_LENGTH);
 		//		seed = 131;
 		collison = 0;
 		keyStored = 0;
@@ -302,7 +303,7 @@ public:
 	HashTable(long long degree) {
 		this->length = degree * 2;
 		this->array = new Element *[degree * 2];
-		memset(array, NULL, sizeof(void *) * degree * 2);
+		memset(array, '\0', sizeof(void *) * degree * 2);
 		//		seed = 131;
 		collison = 0;
 		keyStored = 0;
@@ -431,12 +432,12 @@ struct EdgeType{
 
 	void build(vector<int> &from_to_info, vector<int> &to_from_info) {
 		// ! vector need test
-		for (int i = 0; i < from_to_info.size(); i = i + 2) {
+		for (long unsigned int i = 0; i < from_to_info.size(); i = i + 2) {
 			from_to[from_to_info[i]] = from_to_info[i + 1];
 			from_to_index[i / 2] = from_to_info[i];
 		}
 		from_to_size = from_to_info.size() / 2;
-		for (int i = 0; i < to_from_info.size(); i = i + 2) {
+		for (long unsigned int i = 0; i < to_from_info.size(); i = i + 2) {
 			to_from[to_from_info[i]] = to_from_info[i + 1];
 			to_from_index[i / 2] = to_from_info[i];
 		}
@@ -459,13 +460,13 @@ struct EdgeType{
 		vector<int> to_from_int;
 
 		if (from_to_.size() > 1) {
-			for (int i = 0; i < from_to_.size(); i++) {
+			for (long unsigned int i = 0; i < from_to_.size(); i++) {
 				from_to_int.push_back(atoi(from_to_[i].c_str()));
 			}
 		}
 
 		if (to_from_.size() > 1) {
-			for (int i = 0; i < to_from_.size(); i++) {
+			for (long unsigned int i = 0; i < to_from_.size(); i++) {
 				to_from_int.push_back(atoi(to_from_[i].c_str()));
 			}
 		}

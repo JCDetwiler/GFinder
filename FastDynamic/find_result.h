@@ -37,7 +37,7 @@ inline void justPutInHeap(int cost, vector<long long> & result) {
 inline void checkNow(int already_matched_size, vector<int> & cost) {
 
 	int totalCost = 0;
-	for (int i = 0; i < cost.size(); i++) {
+	for (unsigned long int i = 0; i < cost.size(); i++) {
 		totalCost += cost[i];
 	}
 
@@ -333,7 +333,7 @@ inline double LeafMappingEnumeration(double & found_mapping_enumeration, int * a
 		}
 	}
 
-	delete search_iterator_leaf;
+	delete[] search_iterator_leaf;
 	return found_mapping_enumeration;
 
 }
@@ -812,12 +812,12 @@ inline vector<long long> bridge3(long long from, long long to) {
 
 inline void output_result() {
 	vector<long long> intermediate_node;
-	for (int i = 0; i < g_result_heap.size(); i++) {
+	for (unsigned long int i = 0; i < g_result_heap.size(); i++) {
 
 		Result r = g_result_heap[i];
 
 		if (IS_ONE_HOP_DATA_GRAPH > 0) {
-			for (int i = 0; i < r.result.size(); i++) {
+			for (unsigned long int i = 0; i < r.result.size(); i++) {
 				cout << i << ":" << r.result[i] << " ";
 			}
 			cout << "   cost: " << r.cost << endl;
@@ -828,7 +828,7 @@ inline void output_result() {
 		intermediate_node.clear();
 		for (int j = 1; j < g_cnt_node_query_graph; j++) {
 			MatchOrderUnit * unit = &g_matching_order_unit_of_query[j];
-			long long cur_index = unit->node;
+			unsigned long int cur_index = unit->node;
 			if (cur_index < 0) {
 				continue;
 			}
@@ -860,7 +860,7 @@ inline void output_result() {
 				intermediate_node.push_back(intermediate);
 			}
 			else if (g_adj_list_one_hop_distance_data_graph[parent_data_id].query(cur_data_id)) {
-				int good = 0;
+				//int good = 0;
 			}
 			else {
 				vector<long long> t = bridge3(parent_data_id, cur_data_id);
@@ -885,7 +885,7 @@ inline void output_result() {
 						intermediate_node.push_back(intermediate);
 					}
 					else if (g_adj_list_one_hop_distance_data_graph[parent_data_id].query(cur_data_id)) {
-						int good = 0;
+						//int good = 0;
 					}
 					else {
 						vector<long long> t = bridge3(parent_data_id, cur_data_id);
@@ -899,10 +899,10 @@ inline void output_result() {
 
 		}
 
-		for (long long j = 0; j < r.result.size(); ++j) {
+		for (unsigned long int j = 0; j < r.result.size(); ++j) {
 			cout << j << ":" << r.result[j] << " ";
 		}
-		for (long long j = 0; j < intermediate_node.size(); ++j) {
+		for (unsigned long int j = 0; j < intermediate_node.size(); ++j) {
 			cout << j << ":" << intermediate_node[j] << " ";
 		}
 

@@ -11,5 +11,5 @@ pair <long long, long long>  v_nec_count[MAX_QUERY_NODE];
 long long nec_count_set_size = -1;
 long long  nec_count_set[MAX_QUERY_NODE];
 
-extern long long m_already_mapped = 0;
-extern long long m_back_trace = 0;
+long long m_already_mapped = 0;
+long long m_back_trace = 0;

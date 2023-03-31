@@ -1,4 +1,3 @@
-#pragma once
 #include "stdafx.h"
 #include "global_variable.h"
 
@@ -157,7 +156,7 @@ int * g_sim_visited_stack;
 long long g_sim_visited_length = 0;
 
 
-int TOPK = 10;
+long unsigned int TOPK = 10;
 int NODE_MISS_COST = 3;
 int BRIDGE_COST = 10;
 int EDGE_MISSING_COST = 10;

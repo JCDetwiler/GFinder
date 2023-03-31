@@ -36,7 +36,7 @@ inline long long selectRootFromQuery() {
 		// neighbor / degree
 		ranking = (double)(end - start) / (double)degree;
 
-		
+
 		query_root_sort_list.push_back(floor(ranking * ONE_M) * ONE_M + i);
 
 		if (ranking < least_ranking) {
@@ -48,10 +48,8 @@ inline long long selectRootFromQuery() {
 	return start_node;
 }
 
-inline long long centerPiece() {}
 
-
-inline boolean checkCandidate(long long cand_id, long long query_id) {
+inline bool checkCandidate(long long cand_id, long long query_id) {
 	double a = g_node_similarity_matrix[query_id * g_cnt_node_of_data_graph + cand_id];
 	if (a >= MIN_SIM) {
 		return true;
@@ -164,7 +162,7 @@ inline void findRootCandidate() {
 #endif
 
 		// check candidate
-		boolean isGood = checkCandidate(cand_id, g_root_node_id_of_query);
+		bool isGood = checkCandidate(cand_id, g_root_node_id_of_query);
 		if (!isGood) {
 			continue;
 		}

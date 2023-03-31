@@ -1,4 +1,3 @@
-#pragma warning(disable:4996)
 #pragma once
 
 #ifndef FAST_DYNAMIC_PRE_PROCESS_DATA_GRAPH_H_
@@ -108,8 +107,8 @@ inline void buildAdjListAndLabelPositionMatrix(vector<vector<EdgeType>> & adj_li
 			cur_node_id_label_matrix_index += cur_count;
 			continue;
 		}
-		
-		for (long long j = 1; j < adj_list[i].size(); j++) {
+
+		for (unsigned long int j = 1; j < adj_list[i].size(); j++) {
 			int this_label = g_nodes_label_after_change_data_graph[adj_list[i][j].node_id];
 			if (this_label == begin_label) {
 				cur_count++;
@@ -287,12 +286,12 @@ inline void addOneAndTwoHopNeighbor() {
 				// no visited before, two
 				if (g_good_count_data_graph[twoNeighbor] == 0) {
 					g_adj_list_two_hop_distance_data_graph[node_id].AddValue(twoNeighbor);
-					
+
 					g_good_count_data_graph[twoNeighbor] = 1;
 				}
-				
+
 			}
-		
+
 		}
 
 		memset(g_good_count_data_graph, 0, sizeof(int) * g_cnt_node_of_data_graph);
@@ -310,7 +309,7 @@ inline void readAndProcessDataGraph(string data_graph_file) {
 
 	g_good_count_data_graph = new int[g_cnt_node_of_data_graph];
 	memset(g_good_count_data_graph, 0, sizeof(int) * g_cnt_node_of_data_graph);
-	
+
 	int label_index = 1; // start label from 1, because 0 means not found the label
 	int node_index = 0;
 
@@ -329,7 +328,7 @@ inline void readAndProcessDataGraph(string data_graph_file) {
 			int label_from_file = atoi(v[2].c_str());
 
 			int actual_label = g_transfer_label_mapping[label_from_file];
-			
+
 			if (actual_label == 0) {
 				actual_label = label_index;
 				g_transfer_label_mapping[label_from_file] = label_index;
@@ -398,21 +397,21 @@ inline void readAndProcessDataGraph(string data_graph_file) {
 
 	// Use for speeding up at enumeration
 	//======  hash table initialization ====================
-	
+
 	if (SIZEOK == 0) { //only create the hash tables if the cnt is larger than the size of edge matrix
 		g_hash_table = new HashTable *[g_cnt_node_of_data_graph];
-		for (long long i = 0; i < local_adj_list.size(); i++) {
+		for (unsigned long int i = 0; i < local_adj_list.size(); i++) {
 
 			if (g_cnt_node_of_data_graph <= HT_LENGTH)
 				g_hash_table[i] = new HashTable();
 			else
 				g_hash_table[i] = new HashTable(g_node_degree_data_graph[i]);
 
-			for (long long j = 0; j < local_adj_list[i].size(); j++)
+			for (unsigned long int j = 0; j < local_adj_list[i].size(); j++)
 				g_hash_table[i]->AddValue(local_adj_list[i][j].node_id);
 		}
 	}
-	
+
 	//========================================================
 
 #ifdef NLF_CHECK
@@ -422,7 +421,7 @@ inline void readAndProcessDataGraph(string data_graph_file) {
 	NLF_check = new long long[g_cnt_node_of_data_graph * NLF_size];
 	memset(NLF_check, 0, sizeof(long long) * NLF_size * g_cnt_node_of_data_graph);
 	for (long long i = 0; i < local_adj_list.size(); i++)
-		// iterate node i's neighboor	
+		// iterate node i's neighboor
 		for (long long j = 0; j < local_adj_list[i].size(); j++) {
 			long long label = g_nodes_label_after_change_data_graph[local_adj_list[i][j].node_id];
 			long long idx = NLF_size - 1 - label / SIZEOF_INT;
@@ -437,7 +436,7 @@ inline void readAndProcessDataGraph(string data_graph_file) {
 	MAX_NB_degree_data = new int[g_cnt_node_of_data_graph];
 	for (long long i = 0; i < g_cnt_node_of_data_graph; i++) {
 		long long max_degree = 0;
-		for (long long j = 0; j < local_adj_list[i].size(); j++) {
+		for (unsigned long int j = 0; j < local_adj_list[i].size(); j++) {
 			int node = local_adj_list[i][j].node_id;
 			if (g_node_degree_data_graph[node] > max_degree)
 				max_degree = g_node_degree_data_graph[node];
@@ -567,7 +566,7 @@ inline void initParametersBeforeQuery() {
 	g_already_has_one_parent_data_node = new int[g_cnt_node_of_data_graph];
 	memset(g_already_has_one_parent_data_node, -1, sizeof(int) * g_cnt_node_of_data_graph);
 	g_index_array_for_indexSet = new CPICell[g_cnt_node_of_data_graph];
-	
+
 
 	NEC_mapping_Actual_first = new int[(g_cnt_unique_label_data_graph + 1) * MAX_QUERY_NODE]; //label and the parent node id
 	memset(NEC_mapping_Actual_first, 0, sizeof(int) * (g_cnt_unique_label_data_graph + 1) * MAX_QUERY_NODE);
@@ -596,7 +595,7 @@ inline void buildOneHopLabelCountQuery_used_by_sim() {
 		int begin = g_nodes_adj_list_start_index_query_graph[node_id];
 		int end = g_nodes_adj_list_start_index_query_graph[node_id + 1];
 
-		for (int i = begin; i < end; i++) {	
+		for (int i = begin; i < end; i++) {
 			int neighbor = g_nodes_adj_list_with_edge_type_query_graph[i].node_id;
 			int label = g_nodes_label_query_graph[neighbor];
 			g_one_hop_label_count_query_graph[node_id * g_cnt_unique_label_data_graph + label - 1]++;
@@ -721,7 +720,7 @@ inline void buildSimilarityMatrix() {
 inline void single_readQueryGraph(string query_graph_file) {
 
 	// build adj list
-	int adj_index = 0;
+	// int adj_index = 0;
 	vector<vector <EdgeType>> local_adj_list;
 
 	string line;
@@ -771,7 +770,7 @@ inline void single_readQueryGraph(string query_graph_file) {
 	g_cnt_node_query_graph = local_adj_list.size();
 
 	long long sum_degree = 0;
-	for (long long i = 0; i < local_adj_list.size(); i++) {
+	for (unsigned long int i = 0; i < local_adj_list.size(); i++) {
 		int degree = local_adj_list[i].size();
 		g_node_degree_query_graph[i] = degree;
 		g_core_number_query_graph[i] = degree;
@@ -793,14 +792,14 @@ inline void single_readQueryGraph(string query_graph_file) {
 	g_nodes_adj_list_with_edge_type_query_graph.resize(sum_degree);
 	long long cur_adj_start_index = 0;
 	int adj_list_index = 0;
-	for (int i = 0; i < local_adj_list.size(); i++) {
+	for (unsigned long int i = 0; i < local_adj_list.size(); i++) {
 		if (local_adj_list[i].size() == 0) {
 			g_nodes_adj_list_start_index_query_graph[i] = cur_adj_start_index;
 			continue;
 		}
 
 		g_nodes_adj_list_start_index_query_graph[i] = cur_adj_start_index;
-		for (int j = 0; j < local_adj_list[i].size(); j++) {
+		for (unsigned long int j = 0; j < local_adj_list[i].size(); j++) {
 			g_nodes_adj_list_with_edge_type_query_graph[adj_list_index] = local_adj_list[i][j];
 			adj_list_index++;
 		}
@@ -832,7 +831,7 @@ inline void readQueryGraph(ifstream &fin_query) {
 	for (long long i = 0; i < g_cnt_node_query_graph; i++) {
 
 		g_nodes_adj_list_start_index_query_graph[i] = adj_index;
-		
+
 		fin_query >> m >> g_label_cur_node_query_graph >> g_degree_cur_node_query_graph;
 
 		if (g_degree_cur_node_query_graph > MAX_DEGREE_A_NODE_QUERY) {
@@ -847,7 +846,7 @@ inline void readQueryGraph(ifstream &fin_query) {
 		for (long long j = 0; j < g_degree_cur_node_query_graph; j++) {
 			fin_query >> g_nodes_adj_list_with_edge_type_query_graph[adj_index].node_id;
 			adj_index++;
-			
+
 		}
 	}
 	g_nodes_adj_list_start_index_query_graph[g_cnt_node_query_graph] = adj_index;

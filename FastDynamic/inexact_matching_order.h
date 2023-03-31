@@ -14,7 +14,7 @@ inline void generateInexactMatchingOrder() {
 	temp_array_query_index = 0;
 	long long root = g_root_node_id_of_query;
 
-	long long first_path_leaf; // the leaf node of the first path
+	long long first_path_leaf = 0; // the leaf node of the first path
 
 							   //include the root node first => this always has nothing to do with the matching option
 	addIntoMatchOrderSequenceForWholeGraph(root, 1, g_query_node_id_to_matching_order_num); // need to change this function if used for bcc-ordered matching
@@ -22,7 +22,7 @@ inline void generateInexactMatchingOrder() {
 	sum_nontree_edge_of_every_node[root] = 0; // must initialize this
 
 
-	long long first_leaf_index;
+	long long first_leaf_index = 0;
 
 	calculate_path_cost_in_core_by_core_query_tree(root, first_path_leaf, first_leaf_index);
 
@@ -42,7 +42,7 @@ inline void generateInexactMatchingOrder() {
 
 	// bottom-up for each remaining path and record each leaf path's connection node
 	{
-		long long min_leaf_index;
+		long long min_leaf_index = 0;
 		double min_ranking = DBL_MAX;
 
 		for (long long i = 0; i < g_leaf_nodes_index; i++) {
@@ -126,7 +126,7 @@ inline void generateInexactMatchingOrder() {
 
 	{//now we start to select the rest of the paths
 
-		long long min_leaf_index;
+		long long min_leaf_index = 0;
 
 		while (g_leaf_nodes_index != 0) {
 
@@ -182,7 +182,7 @@ inline void generateInexactMatchingOrder() {
 				//==============================
 
 				// I change
-				
+
 				double ranking = path_sum / (cand_con);
 				if (cand_con == 0 && path_sum == 0) {
 					ranking = 0;

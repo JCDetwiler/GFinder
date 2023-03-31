@@ -111,7 +111,6 @@ inline void buildBFSCoreQueryTree() {
 		current_level++;
 
 	}
-	int a = 0;
 }
 
 

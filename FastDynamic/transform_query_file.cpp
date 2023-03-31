@@ -32,7 +32,7 @@ void transfer_TurboISOQuery_to_myquery(string querygraphFileFolder) {
 			cout << "t " << id << " " << cnt_node_query << " " << degree_query * 2 << endl;
 			for (long long i = 0; i < cnt_node_query; i++) {
 				cout << i << " " << nodes_label_query[i] << " " << nodes_query[i].size() << " ";
-				for (long long j = 0; j < nodes_query[i].size(); j++) {
+				for (unsigned long int j = 0; j < nodes_query[i].size(); j++) {
 					cout << nodes_query[i][j] << " ";
 				}
 				cout << endl;
@@ -69,7 +69,7 @@ void transfer_TurboISOQuery_to_myquery(string querygraphFileFolder) {
 	cout << "t " << id << " " << cnt_node_query << " " << degree_query * 2 << endl;
 	for (long long i = 0; i < cnt_node_query; i++) {
 		cout << i << " " << nodes_label_query[i] << " " << nodes_query[i].size() << " ";
-		for (long long j = 0; j < nodes_query[i].size(); j++)
+		for (unsigned long int j = 0; j < nodes_query[i].size(); j++)
 			cout << nodes_query[i][j] << " ";
 		cout << endl;
 	}

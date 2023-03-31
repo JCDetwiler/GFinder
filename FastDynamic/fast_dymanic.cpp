@@ -74,7 +74,7 @@ void printVectorInt(vector<int> &vet) {
 }
 
 void myy(vector<int> &a) {
-	for (int i = 0; i < a.size(); i++) {
+	for (unsigned long int i = 0; i < a.size(); i++) {
 		cout << i;
 	}
 }
@@ -90,15 +90,15 @@ inline bool is_contain_empty_indexset() {
 	return false;
 }
 
-int main(int argc, char *argv[])
+int main(int argc, const char *argv[])
 {
 
 	// use for directed graph
 
-	
 
-	argv[1] = "C:\\Users\\lihui\\workspace\\github\\test_dataset\\data.format";
-	argv[2] = "C:\\Users\\lihui\\workspace\\github\\test_dataset\\query.format";
+
+	argv[1] = "test_dataset/data.format";
+	argv[2] = "test_dataset/query.format";
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -165,9 +165,6 @@ int main(int argc, char *argv[])
 
 	//getLimit_full(str_full_limit, LIMIT);
 
-	char c;
-	int query_id;
-
 	for (long long i = 0; i < count_query_file; i++) {
 		// clean heap here
 		{
@@ -193,7 +190,7 @@ int main(int argc, char *argv[])
 		}
 
 		if (g_isTree) {
-			
+
 		}
 		else {
 			// extract residual tree and NEC from query
@@ -204,24 +201,24 @@ int main(int argc, char *argv[])
 			int root_index_point = -1;
 			while (g_root_candidates_size == 0) {
 				root_index_point = root_index_point + 1;
-				if (root_index_point == query_root_sort_list.size()) {
+				if (root_index_point == (int) query_root_sort_list.size()) {
 					cout << "All node in core has no candidate!" << endl;
 					return 0;
 				}
 				g_root_node_id_of_query = query_root_sort_list[root_index_point] % ONE_M;
 				findRootCandidate();
 			}
-			
+
 			PREPARE_END;
 
-			for (int region = 0; region < g_root_candidates_size; region++) {			
+			for (int region = 0; region < g_root_candidates_size; region++) {
 
 				long long root_cand_id = g_root_candidates[region];
 
 				g_nte_array_for_matching_unit_index = 0;
 				g_matching_sequence_index = 0;
 				g_matching_order_size_of_core = 0;
-				
+
 				// BFS method
 				if (!DYNAMIC) {
 					buildBFSCoreQueryTree();
@@ -238,7 +235,7 @@ int main(int argc, char *argv[])
 						//	break;
 						//}
 					}
-					
+
 					// buildCoreQueryTree();
 					generateMatchingOrderByDynamic();
 				}
@@ -259,14 +256,14 @@ int main(int argc, char *argv[])
 
 				// Dynamic method
 				//forwardBuildQueue(root_cand_id);
-				
+
 				//buildDynamicTreeCPI(root_cand_id);
 				//forwardBuild(root_cand_id);
 				//buildCoreQueryTree();
 				// build core query tree
 
 				//cout << "forward Done" << endl;
-				
+
 				//cout << "backward Done" << endl;
 				//buildSearchIterator();
 				//cout << "build search iterator Done" << endl;
@@ -275,11 +272,10 @@ int main(int argc, char *argv[])
 				//generateMatchingOrderByCoreQueryTree();
 				//matchingOrderLayer();
 				//test1();
-				//cout << "generateMatchingOrder Done" << endl;				
+				//cout << "generateMatchingOrder Done" << endl;
 				//findAllMatching();
 				find_inexact_result();
-				
-				int aaa = 0;
+
 			}
 
 		}

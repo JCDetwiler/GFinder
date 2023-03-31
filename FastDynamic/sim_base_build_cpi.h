@@ -144,7 +144,7 @@ inline void buildBFSTreeCPI(long long root_candidate_id) {
 	memset(visited, 0, sizeof(char) * g_cnt_node_query_graph);
 	visited[g_root_node_id_of_query] = 1;
 
-	long long current_level = 0;
+	// long long current_level = 0;
 
 	// forward
 	for (long long i = 1; i < g_BFS_sequence_length; i++) {
@@ -154,7 +154,7 @@ inline void buildBFSTreeCPI(long long root_candidate_id) {
 		visited[current_node] = 1;
 		long long label_cur = g_nodes_label_query_graph[current_node];
 		long long degree_cur = g_node_degree_query_graph[current_node];
-		long long level_cur = BFS_level_query[current_node];
+		// long long level_cur = BFS_level_query[current_node];
 
 #ifdef CORE_AND_MAX_NB_FILTER
 
@@ -181,7 +181,7 @@ inline void buildBFSTreeCPI(long long root_candidate_id) {
 				continue;
 			count_index_array_for_indexSet = 0;
 
-			// iterate all candidate 
+			// iterate all candidate
 			set<SimCell>::iterator it;
 			for (it = g_need_clean.begin(); it != g_need_clean.end(); ++it) {
 				long long can_id = (*it).id;
@@ -310,7 +310,7 @@ inline int buildSimCPINode(long long currentId_query, long long parent_id_query)
 
 	memset(g_already_visited_data_graph, 0, sizeof(char) * g_cnt_node_of_data_graph);
 
-	int pre_visited_num = 0;
+	// int pre_visited_num = 0;
 
 	long long curLabel = g_nodes_label_query_graph[currentId_query];
 	char * visited = g_visited_for_query_graph;
@@ -333,7 +333,7 @@ inline int buildSimCPINode(long long currentId_query, long long parent_id_query)
 			continue;
 		count_index_array_for_indexSet = 0;
 
-		// iterate all candidate 
+		// iterate all candidate
 		set<SimCell>::iterator it;
 		for (it = g_need_clean.begin(); it != g_need_clean.end(); ++it) {
 			long long can_id = (*it).id;
@@ -448,11 +448,11 @@ inline int buildSimCPINode(long long currentId_query, long long parent_id_query)
 
 inline void buildBFSSequence() {
 
-	CoreQueryBFSTreeNode * root = &core_query_tree[g_root_node_id_of_query];
+	// CoreQueryBFSTreeNode * root = &core_query_tree[g_root_node_id_of_query];
 	BFS_sequence_query_of_all[0] = g_root_node_id_of_query;
 	BFS_parent_query[g_root_node_id_of_query] = -1;
 
-	for (int i = 0; i < g_forward_build_sequence.size(); i++) {
+	for (unsigned long int i = 0; i < g_forward_build_sequence.size(); i++) {
 		long long nodeId = g_forward_build_sequence[i];
 		BFS_parent_query[nodeId] = g_forward_build_parent[i];
 	}
@@ -582,14 +582,14 @@ inline void backwardPrune() {
 	}
 
 	int * edge_matching_array = g_edge_matching_array;
-	
+
 
 	for (long long level = g_level_size; level > 0; level--) {
 		long long current_level = level;
 
 		stable_sort(g_level[current_level].begin(), g_level[current_level].end(), sortByDegree_Query_dec);
 
-		for (long long seq_index = 0; seq_index < g_level[current_level].size(); seq_index++) {
+		for (unsigned long int seq_index = 0; seq_index < g_level[current_level].size(); seq_index++) {
 			long long cur_node = g_level[current_level][seq_index];
 
 			//if this node is a nec node, then it doesnt need to be refined by simulation.
@@ -601,9 +601,9 @@ inline void backwardPrune() {
 			long long label_cur = g_nodes_label_query_graph[cur_node];
 
 			//==== FIRST STEP: deal with its BFS children =====================
-			
+
 			CoreQueryBFSTreeNode & tree_node = core_query_tree[cur_node];
-			
+
 			for (long long j = tree_node.children.first; j < tree_node.children.first + tree_node.children.second; j++) {
 				long long child = g_core_tree_node_child_array[j];
 				visited[child] = 1;

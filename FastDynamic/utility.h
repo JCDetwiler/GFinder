@@ -2,7 +2,7 @@
 #define UTILITY_H
 
 
-#include <time.h>
+#include <sys/time.h>
 #include <iostream>
 #include <stdio.h>
 #include <limits>
@@ -35,8 +35,7 @@
 
 
 
-#include <Windows.h>
-#include <stdint.h> // portable: uint64_t   MSVC: __int64 
+#include <stdint.h> // portable: uint64_t   MSVC: __int64
 
 // MSVC defines this in winsock2.h!?
 //typedef struct timeval {
@@ -44,7 +43,6 @@
 //	long tv_usec;
 //} timeval;
 
-int gettimeofday(struct timeval * tp, struct timezone * tzp);
 
 
 

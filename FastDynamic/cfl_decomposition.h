@@ -79,13 +79,13 @@ inline void coreDecompositionQuery() {
 }
 
 inline void extractResidualStructures() {
-	
+
 	memset(NEC_map, -1, sizeof(long long) * g_cnt_node_query_graph);
 
 	char * visited = g_visited_for_query_graph;
 	memset(visited, 0, sizeof(char) * g_cnt_node_query_graph);
 
-	
+
 	g_residual_tree_match_seq_index = 0;
 	g_residual_tree_leaf_node_index = 0;
 	NEC_leaf_mapping_pair_index = 0;
@@ -256,8 +256,6 @@ inline void extractResidualStructures() {
 	}
 
 #endif
-
-	int a = 0;
 }
 
 

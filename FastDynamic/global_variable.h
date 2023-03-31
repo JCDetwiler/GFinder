@@ -30,7 +30,7 @@ using namespace std;
 
 
 extern int IS_ONE_HOP_DATA_GRAPH;
-extern int TOPK;
+extern long unsigned int TOPK;
 extern int NODE_MISS_COST;
 extern int BRIDGE_COST;
 extern int EDGE_MISSING_COST;
@@ -46,12 +46,12 @@ extern int g_largest_label_data_graph;
 extern int * g_core_number_data_graph;
 extern int * g_node_degree_data_graph;
 extern int g_max_degree_data_graph;
-extern EdgeType * g_nodes_adj_list_with_edge_type_data_graph; 
+extern EdgeType * g_nodes_adj_list_with_edge_type_data_graph;
 extern int size_of_g_nodes_adj_list_with_edge_type_data_graph;
 extern int * g_nodes_adj_list_start_index_data_graph;
 
 // node_id * g_cnt_unique_label_data_graph + label_id = <start, end>
-extern pair<int, int> * g_node_id_label_position_matrix_data_graph; 
+extern pair<int, int> * g_node_id_label_position_matrix_data_graph;
 extern int * g_node_id_sort_by_label_degree_data_graph;
 extern pair<int, int> * g_label_to_sort_by_degree_node_data_graph;
 extern vector<int> g_degree_of_sort_by_label_degree_data_graph;
